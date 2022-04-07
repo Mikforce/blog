@@ -25,8 +25,8 @@ def leave_comment(request, article_id):
     try:
         a = Article.objects.get( id = article_id )
     except:
-
-        a.comment_set.create(author_name = request.POST['name'], comment_text = request.POST['text'])
+        raise Http404("Статья не найдена")
+    a.comment_set.create(author_name = request.POST['name'], comment_text = request.POST['text'])
 
     return HttpResponseRedirect( reverse('articles:detail', args = (a.id,)) )
 
@@ -39,4 +39,4 @@ def comment_delete(request, article_id):
         comment.save()
 
 
-    return HttpResponseRedirect(reverse('articles:detail', args = (comment.id,)))
+    return HttpResponseRedirect( reverse('articles:detail', args = (comment.id,)) )

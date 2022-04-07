@@ -29,13 +29,14 @@
 
 <hr>
 
-<from action="{% url 'articles:leave_comment' article.id %}" method="POST">
+<form action="{% url 'articles:leave_comment' article.id %}" method="POST">
     {% csrf_token %}
+    
     <input type="text" required placeholder="Ваше имя" name="name"><br>
     <textarea name="text" required="" placeholder="Текст коментария" rows="10" cols="30"></textarea><br>
 
     <button type="submit">Оставить коментарий</button>
 
-</from>
+</form>
 
 {% endblock %}

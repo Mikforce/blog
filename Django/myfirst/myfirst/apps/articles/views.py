@@ -37,6 +37,6 @@ def comment_delete(request, article_id):
     if comment.article == request.article:
         comment.is_removed = True
         comment.save()
-    
+
 
     return HttpResponseRedirect(reverse('articles:detail', args = (comment.id,)))

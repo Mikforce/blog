@@ -1,4 +1,5 @@
-{% extends 'base.html '%}
+
+{% extends 'base.html' %}
 
 {% block title %}{{article.article_title}}{% endblock %}
 
@@ -21,6 +22,10 @@
           <strong>{{c.author_name }} :</strong>
           <strong>{{c.comment_text}}</strong>
         </p>
+
+        <a href="{% url 'articles:comment_delete' article.id %}" method="POST" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">Удалить</a>
+
+
     {% endfor %}
 
 {% else %}
@@ -29,13 +34,14 @@
 
 <hr>
 
-<from action="{% url 'articles:leave_comment' article.id %}" method="POST">
+<!-- <from action="{% url 'articles:leave_comment' article.id %}" method="POST"> -->
+<form action="{% url 'articles:leave_comment' article.id %}" method="POST">
     {% csrf_token %}
-    <input type="text" required placeholder="Ваше имя" name="name"><br>
-    <textarea name="text" required="" placeholder="Текст коментария" rows="10" cols="30"></textarea><br>
+    {{ form.name.errors }}
+    <input type="text" required placeholder="Ваше имя" name="name" id="name"><br>
+    <textarea name="text" required="" placeholder="Текст коментария" rows="10" cols="30" id="text"></textarea><br>
+    <input type="submit" value="отправить">
 
-    <button type="submit">Оставить коментарий</button>
-
-</from>
+</form>
 
 {% endblock %}

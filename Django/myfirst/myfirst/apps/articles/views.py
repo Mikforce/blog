@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import Article
+from .models import Comment
 
 def index(request):
     latest_articles_list = Article.objects.order_by('-pub_date')[:5]
@@ -20,11 +21,22 @@ def detail(request, article_id):
     return render(request, 'articles/detail.html', {'article': a, 'latest_comment_list': latest_comment_list})
 
 def leave_comment(request, article_id):
+
     try:
         a = Article.objects.get( id = article_id )
     except:
-        raise Http404("Статья не найдена")
 
-    a.comment_set.create(author_name = request.POST['name'], comment_text = request.POST['text'])
+        a.comment_set.create(author_name = request.POST['name'], comment_text = request.POST['text'])
 
     return HttpResponseRedirect( reverse('articles:detail', args = (a.id,)) )
+
+def comment_delete(request, article_id):
+
+    comment = Comment.objects.get(id = article_id)
+    print(comment)
+    if comment.article == request.article:
+        comment.is_removed = True
+        comment.save()
+    
+
+    return HttpResponseRedirect(reverse('articles:detail', args = (comment.id,)))

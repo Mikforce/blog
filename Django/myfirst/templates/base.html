@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
+<html>
   <head>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -9,6 +9,17 @@
     <title>{% block title %}МОЙ САЙТ{% endblock %}</title>
   </head>
   <body>
+    <div>
+            <h1><a href="/">МОЙ САЙТ</a></h1>
+        </div>
+
+        {% for post in posts %}
+            <div>
+                <p>published: {{ post.published_date }}</p>
+                <h1><a href="">{{ post.title }}</a></h1>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
     {% block content %}{% endblock %}
   </body>
 </html>

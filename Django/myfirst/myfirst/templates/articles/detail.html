@@ -23,7 +23,7 @@
           <strong>{{c.comment_text}}</strong>
         </p>
 
-        <a href="{% url 'articles:comment_delete' article.id %}" method="POST" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">Удалить</a>
+        <a href="{{% url 'articles:comment_delete' article.id %}" method="POST" onclick="return confirm('Вы уверены, что хотите удалить этот комментарий?')">Удалить</a>
 
 
     {% endfor %}

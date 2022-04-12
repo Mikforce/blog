@@ -15,8 +15,7 @@ class Article(models.Model):
     def was_published_recenyly(self):
         return self.pub_date >= (timezone.now() - datetime.timedelta(days = 7))
 
-    def get_absolute_url(self):
-        return revers('article', kwargs={'article_id': self.pk})
+
 
     class Meta:
         verbose_name = 'Статья'
@@ -29,6 +28,9 @@ class Comment(models.Model):
 
     def __atr__(self):
         return self.autor_name
+
+def get_absolute_url(self):
+    return revers('article', kwargs={'article_id': self.pk})
 
     class Meta:
         verbose_name = 'Коментарий'

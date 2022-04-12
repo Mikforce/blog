@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 
 from django.utils import timezone
+from django.urls import reverse
 
 class Article(models.Model):
     article_title = models.CharField('название статьи', max_length = 200)
@@ -13,6 +14,9 @@ class Article(models.Model):
 
     def was_published_recenyly(self):
         return self.pub_date >= (timezone.now() - datetime.timedelta(days = 7))
+
+    def get_absolute_url(self):
+        return revers('article', kwargs={'article_id': self.pk})
 
     class Meta:
         verbose_name = 'Статья'

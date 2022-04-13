@@ -31,17 +31,12 @@ def leave_comment(request, article_id):
     return HttpResponseRedirect( reverse('articles:detail', args = (a.id,)) )
 
 
-
-
 '''def comment_delete(request, article_id):
 
     selected_comment = get_object_or_404(Comment, id=id)
     selected_comment.delete()
 
     return HttpResponseRedirect( reverse('articles:detail', args = (a.id,)) )'''
-
-
-
 
 def comment_delete(request, id):
     comment = Comment.objects.get( id = id )

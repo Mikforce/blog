@@ -38,10 +38,8 @@ def leave_comment(request, article_id):
 
     return HttpResponseRedirect( reverse('articles:detail', args = (a.id,)) )'''
 
-def comment_delete(request, id):
-    comment = Comment.objects.get( id = id )
-    if comment.user == request.user:
-        comment.is_removed = True
-        comment.save()
+def comment_delete(request, id, article_id):
+    comment = Comment.objects.get( id = article_id )
+    comment.delete()
 
-    return HttpResponseRedirect( reverse('articles:detail', args = (a.id,)) )
+    return HttpResponseRedirect( reverse('articles:detail', args = (comment.id,)) )

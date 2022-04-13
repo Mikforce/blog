@@ -8,7 +8,7 @@ class Article(models.Model):
     article_title = models.CharField('название статьи', max_length = 200)
     article_text = models.TextField('текст статьи')
     pub_date = models.DateTimeField('дата публикации')
-
+    '''cat = models.ForeignKey('Comment', on_delete = models.CASCADE, null = True)'''
     def __atr__(self):
         return self.article_title
 
@@ -27,10 +27,10 @@ class Comment(models.Model):
     comment_text = models.TextField('текст коментария', max_length = 200)
 
     def __atr__(self):
-        return self.autor_name
+        return self.author_name
 
 def get_absolute_url(self):
-    return revers('article', kwargs={'article_id': self.pk})
+    return revers('comment', kwargs={'comment_id': self.pk})
 
     class Meta:
         verbose_name = 'Коментарий'
